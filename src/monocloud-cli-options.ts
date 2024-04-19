@@ -21,6 +21,12 @@ export class MonoCloudCliOptions {
   cookieSecret?: string;
 
   constructor(options: MonoCloudCliOptions) {
+    const sdkVersion = options.sdkVersion?.trim();
+    if (sdkVersion) {
+      this.sdkVersion = sdkVersion;
+      delete options.sdkVersion;
+    }
+
     const error = validate(options) as string & true;
 
     if (typeof error === 'string') {
@@ -29,10 +35,6 @@ export class MonoCloudCliOptions {
 
     this.command = options.command;
     this.framework = options.framework;
-    const sdkVersion = options.sdkVersion?.trim();
-    if (sdkVersion) {
-      this.sdkVersion = sdkVersion;
-    }
     this.issuer = options.issuer;
     this.clientId = options.clientId;
     this.clientSecret = options.clientSecret;
