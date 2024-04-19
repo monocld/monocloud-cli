@@ -1,6 +1,6 @@
 {
   "name": "@monocloud/cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Initialize MonoCloud Authentication in a project",
   "keywords": [
     "monocloud",

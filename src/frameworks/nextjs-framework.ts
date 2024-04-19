@@ -29,17 +29,21 @@ export class NextJSFramework implements FrameworkType {
   }
 
   async installDependencies(): Promise<void> {
-    const packageJson = JSON.parse(readFileSync('package.json').toString());
-
     const packageName = '@monocloud/nextjs-auth';
 
-    if (packageJson.dependencies?.[packageName]) {
+    try {
+      const packageJson = JSON.parse(readFileSync('package.json').toString());
+
+      if (packageJson.dependencies?.[packageName]) {
+        return;
+      }
+    } catch (error) {
       return;
     }
 
     const version = this.options.sdkVersion;
 
-    const packageWithVersion = `${packageName}${version ? `@${version}` : 'latest'}`;
+    const packageWithVersion = `${packageName}${version ? `@${version}` : ''}`;
 
     const installPackage = await prompts({
       type: 'toggle',
